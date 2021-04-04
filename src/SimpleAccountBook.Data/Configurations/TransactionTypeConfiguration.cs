@@ -18,12 +18,12 @@ namespace SimpleAccountBook.Data.Configurations
                 .HasComment("일자");
 
             builder.Property(x => x.TransactionTypeId)
-                .IsRequired()
+                .IsRequired(false)
                 .HasColumnType("char(36)")
                 .HasComment("거래구분 (수입, 비용, 고정자산)");
 
             builder.Property(x => x.TransactionDetailsId)
-                .IsRequired()
+                .IsRequired(false)
                 .HasColumnType("char(36)")
                 .HasComment("거래내용");
 
@@ -33,7 +33,7 @@ namespace SimpleAccountBook.Data.Configurations
 
             builder.Property(x => x.AccountId)
                 .HasColumnType("char(36)")
-                .IsRequired()
+                .IsRequired(false)
                 .HasComment("거래처 식별자");
 
             builder.Property(x => x.AmountId)
@@ -57,11 +57,13 @@ namespace SimpleAccountBook.Data.Configurations
 
             builder.HasOne(x => x.TransactionType)
                 .WithMany()
-                .HasForeignKey(x => x.TransactionTypeId);
+                .HasForeignKey(x => x.TransactionTypeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.TransactionDetails)
                 .WithMany()
-                .HasForeignKey(x => x.TransactionDetailsId);
+                .HasForeignKey(x => x.TransactionDetailsId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Account)
                 .WithMany()
@@ -73,7 +75,8 @@ namespace SimpleAccountBook.Data.Configurations
 
             builder.HasOne(x => x.Remark)
                 .WithMany()
-                .HasForeignKey(x => x.RemarkId);
+                .HasForeignKey(x => x.RemarkId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Business)
                 .WithMany(x => x.Transactions)

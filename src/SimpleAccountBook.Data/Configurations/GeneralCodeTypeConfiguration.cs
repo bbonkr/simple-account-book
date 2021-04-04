@@ -33,8 +33,8 @@ namespace SimpleAccountBook.Data.Configurations
                 .HasComment("출력순서");
 
             builder.HasOne(x => x.Parent)
-                .WithMany(x => x.SubCodes)
-                .HasForeignKey(x => x.ParentId);
+                  .WithMany(x => x.SubCodes)
+                  .HasForeignKey(x => x.ParentId);
 
             // If needs
             //builder.HasIndex(x => x.ParentId)

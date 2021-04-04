@@ -49,11 +49,13 @@ namespace SimpleAccountBook.Data.Configurations
 
             builder.HasOne(x => x.Address)
                 .WithOne()
-                .HasForeignKey<Business>(x => x.AddressId);
+                .HasForeignKey<Business>(x => x.AddressId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Businesses)
-                .HasForeignKey(x => x.UserId);            
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable(nameof(Business));
         }

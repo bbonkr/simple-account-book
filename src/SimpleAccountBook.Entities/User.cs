@@ -11,7 +11,11 @@ namespace SimpleAccountBook.Entities
 
         public string DisplayName { get; set; }
 
-        public string IsEmailVerified { get; set; }
+        public bool IsEmailVerified { get; set; } = false;
+
+        public bool IsLocked { get; set; } = false;
+
+        public int FailureCount { get; set; } = 0;
 
         public virtual ICollection<Business> Businesses { get; set; }
     }

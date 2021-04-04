@@ -35,6 +35,21 @@ namespace SimpleAccountBook.Data.Configurations
                 .IsRequired()
                 .HasComment("출력이름");
 
+            builder.Property(x => x.IsEmailVerified)
+                .IsRequired()
+                .HasDefaultValue(false)
+                .HasComment("전자우편주소 확인 여부");
+
+            builder.Property(x => x.IsLocked)
+                .IsRequired()
+                .HasDefaultValue(false)
+                .HasComment("계정 잠금 여부");
+
+            builder.Property(x => x.FailureCount)
+                .IsRequired()
+                .HasDefaultValue(0)
+                .HasComment("인증 실패 횟수");
+
             builder.ToTable(nameof(User));
         }
     }
