@@ -10,6 +10,11 @@ namespace SimpleAccountBook.Entities
         public Guid? ParentId { get; set; }
 
         /// <summary>
+        /// 상위코드
+        /// </summary>
+        public virtual GeneralCode Parent { get; set; }
+
+        /// <summary>
         /// 코드
         /// </summary>
         public string Code { get; set; }
@@ -18,6 +23,11 @@ namespace SimpleAccountBook.Entities
         /// 출력
         /// </summary>
         public string Text { get; set; }
+
+        /// <summary>
+        /// 출력순서
+        /// </summary>
+        public int Ordinal { get; set; }
 
     }
 }
