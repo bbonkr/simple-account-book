@@ -10,10 +10,12 @@ using kr.bbon.AspNetCore.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using SimpleAccountBook.Data;
 
 namespace SimepleAccountBook.App
 {
@@ -29,6 +31,16 @@ namespace SimepleAccountBook.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var defaultConnectionString = Configuration.GetConnectionString("Default");
+
+            services.AddPooledDbContextFactory<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(defaultConnectionString, sqlServerOptions =>
+                {
+                    sqlServerOptions.MigrationsAssembly($"{typeof(ApplicationDbContext).Namespace}.SqlServer");
+                });
+            });
+
             var defaultApiVersion = new ApiVersion(1, 0);
 
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.Name));
@@ -41,6 +53,8 @@ namespace SimepleAccountBook.App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDatabaseMigrations(true);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

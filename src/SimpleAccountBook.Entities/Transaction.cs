@@ -7,12 +7,12 @@ namespace SimpleAccountBook.Entities
     /// </summary>
     public class Transaction :EntityBase
     {
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// 거래구분 (수입, 비용, 고정자산)
         /// </summary>
-        public Guid TransactionTypeId { get; set; }
+        public Guid? TransactionTypeId { get; set; }
         
         /// <summary>
         /// 거래구분 (수입, 비용, 고정자산)
@@ -22,7 +22,7 @@ namespace SimpleAccountBook.Entities
         /// <summary>
         /// 거래 내용 
         /// </summary>
-        public Guid TransactionDetailsId { get; set; }
+        public Guid? TransactionDetailsId { get; set; }
 
         public virtual GeneralCode TransactionDetails { get; set; }
 
@@ -34,7 +34,7 @@ namespace SimpleAccountBook.Entities
         /// <summary>
         /// 거래처 식별자
         /// </summary>
-        public Guid AccountId { get; set; }
+        public Guid? AccountId { get; set; }
 
         /// <summary>
         /// 거래처
@@ -54,7 +54,7 @@ namespace SimpleAccountBook.Entities
         /// <summary>
         /// 비고 식별자
         /// </summary>
-        public Guid RemarkId { get; set; }
+        public Guid? RemarkId { get; set; }
 
         /// <summary>
         /// 비고
@@ -62,7 +62,7 @@ namespace SimpleAccountBook.Entities
         public virtual GeneralCode Remark { get; set; }
 
         /// <summary>
-        /// 비고 작성
+        /// 비고 기록
         /// </summary>
         public string RemarkNote { get; set; }
 
