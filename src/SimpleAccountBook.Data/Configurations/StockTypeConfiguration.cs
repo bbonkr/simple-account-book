@@ -19,21 +19,25 @@ namespace SimpleAccountBook.Data.Configurations
             builder.Property(x => x.ProductBeginningOfYear)
                 .IsRequired()
                 .HasDefaultValue(0)
+                .HasColumnType("decimal(15, 2)")
                 .HasComment("기초상품재고액");
 
             builder.Property(x => x.ProductEndYear)
                 .IsRequired()
                 .HasDefaultValue(0)
+                .HasColumnType("decimal(15, 2)")
                 .HasComment("기말상품재고액");
 
             builder.Property(x => x.MaterialBeginningOfYear)
                 .IsRequired()
                 .HasDefaultValue(0)
+                .HasColumnType("decimal(15, 2)")
                 .HasComment("기초재료재고액");
 
             builder.Property(x => x.MaterialEndYear)
                 .IsRequired()
                 .HasDefaultValue(0)
+                .HasColumnType("decimal(15, 2)")
                 .HasComment("기말재료재고액");
 
             builder.Property(x => x.BusinessId)

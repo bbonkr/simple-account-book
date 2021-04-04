@@ -54,7 +54,7 @@ namespace SimpleAccountBook.Entities
         /// <summary>
         /// 비고 식별자
         /// </summary>
-        public Guid RemarkId { get; set; }
+        public Guid? RemarkId { get; set; }
 
         /// <summary>
         /// 비고

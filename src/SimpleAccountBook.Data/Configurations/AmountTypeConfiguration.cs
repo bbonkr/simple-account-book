@@ -14,11 +14,13 @@ namespace SimpleAccountBook.Data.Configurations
 
             builder.Property(x => x.SupplyPrice)
                 .IsRequired()
+                .HasColumnType("decimal(15, 2)")
                 .HasDefaultValue(0)
                 .HasComment("공급가액");
 
             builder.Property(x => x.Tax)
                 .IsRequired()
+                .HasColumnType("decimal(15, 2)")
                 .HasDefaultValue(0)
                 .HasComment("세액");
 

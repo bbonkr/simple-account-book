@@ -24,5 +24,10 @@ namespace SimpleAccountBook.Data
 
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        }
     }
 }

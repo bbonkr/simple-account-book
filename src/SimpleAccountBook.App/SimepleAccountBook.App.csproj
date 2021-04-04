@@ -14,4 +14,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleAccountBook.Data.SqlServer\SimpleAccountBook.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\SimpleAccountBook.Data\SimpleAccountBook.Data.csproj" />
+    <ProjectReference Include="..\SimpleAccountBook.Entities\SimpleAccountBook.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

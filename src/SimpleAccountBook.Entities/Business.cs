@@ -22,7 +22,7 @@ namespace SimpleAccountBook.Entities
         /// <summary>
         /// 주소 식별자
         /// </summary>
-        public Guid AddressId { get; set; }
+        public Guid? AddressId { get; set; }
 
         /// <summary>
         /// 주소
