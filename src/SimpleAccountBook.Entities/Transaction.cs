@@ -7,7 +7,7 @@ namespace SimpleAccountBook.Entities
     /// </summary>
     public class Transaction :EntityBase
     {
-        public DateTimeOffset Date { get; set; }
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// 거래구분 (수입, 비용, 고정자산)
@@ -62,7 +62,7 @@ namespace SimpleAccountBook.Entities
         public virtual GeneralCode Remark { get; set; }
 
         /// <summary>
-        /// 비고 작성
+        /// 비고 기록
         /// </summary>
         public string RemarkNote { get; set; }
 

@@ -33,7 +33,7 @@ namespace SimpleAccountBook.Data.Configurations
             builder.Property(x => x.DisplayName)
                 .HasMaxLength(300)
                 .IsRequired()
-                .HasComment("출력이름");               
+                .HasComment("출력이름");
 
             builder.ToTable(nameof(User));
         }

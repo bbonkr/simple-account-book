@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SimpleAccountBook.Entities
 {
@@ -14,8 +15,9 @@ namespace SimpleAccountBook.Entities
         /// </summary>
         public virtual GeneralCode Parent { get; set; }
 
+        // TODO: 필요할까?
         /// <summary>
-        /// 코드
+        /// 코드 
         /// </summary>
         public string Code { get; set; }
 
@@ -29,5 +31,6 @@ namespace SimpleAccountBook.Entities
         /// </summary>
         public int Ordinal { get; set; }
 
+        public virtual ICollection<GeneralCode> SubCodes { get; set; }
     }
 }
