@@ -16,7 +16,7 @@ namespace SimpleAccountBook.Data
     {
         public static IApplicationBuilder UseDatabaseMigrations(this IApplicationBuilder app, bool seedSampleData = false)
         {
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceProvider>().CreateScope())
+            using (var scope = app.ApplicationServices.CreateScope())
             {
                 using (var dbContext = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>().CreateDbContext())
                 {
