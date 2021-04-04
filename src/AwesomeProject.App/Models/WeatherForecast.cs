@@ -1,6 +1,6 @@
 using System;
 
-namespace AwesomeProject.App.Models
+namespace SimepleAccountBook.App.Models
 {
     public class WeatherForecast
     {

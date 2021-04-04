@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 
-namespace AwesomeProject.App
+namespace SimepleAccountBook.App
 {
     public class Startup
     {
