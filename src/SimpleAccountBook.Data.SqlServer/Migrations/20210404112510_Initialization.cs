@@ -19,7 +19,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     StreetAddress2 = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true, comment: "세부주소2"),
                     PhoneNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, comment: "전화번호"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 401, DateTimeKind.Unspecified).AddTicks(9447), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 726, DateTimeKind.Unspecified).AddTicks(4799), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -36,7 +36,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     SupplyPrice = table.Column<decimal>(type: "decimal(15,2)", nullable: false, defaultValue: 0m, comment: "공급가액"),
                     Tax = table.Column<decimal>(type: "decimal(15,2)", nullable: false, defaultValue: 0m, comment: "세액"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 402, DateTimeKind.Unspecified).AddTicks(8470), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 727, DateTimeKind.Unspecified).AddTicks(2720), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -55,7 +55,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     Text = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "출력"),
                     Ordinal = table.Column<int>(type: "int", nullable: false, defaultValue: 1, comment: "출력순서"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 407, DateTimeKind.Unspecified).AddTicks(3014), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 732, DateTimeKind.Unspecified).AddTicks(1744), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -78,9 +78,11 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     Email = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "전자우편주소, 로그인에 사용"),
                     Password = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false, comment: "비밀번호, 해시됨"),
                     DisplayName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false, comment: "출력이름"),
-                    IsEmailVerified = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsEmailVerified = table.Column<bool>(type: "bit", nullable: false, defaultValue: false, comment: "전자우편주소 확인 여부"),
+                    IsLocked = table.Column<bool>(type: "bit", nullable: false, defaultValue: false, comment: "계정 잠금 여부"),
+                    FailureCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0, comment: "인증 실패 횟수"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 414, DateTimeKind.Unspecified).AddTicks(271), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 739, DateTimeKind.Unspecified).AddTicks(8133), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -98,7 +100,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     RegistrationNumber = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true, comment: "사업자등록번호, 법인등록번호"),
                     AddressId = table.Column<string>(type: "char(36)", nullable: true, comment: "주소 식별자"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 388, DateTimeKind.Unspecified).AddTicks(9489), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 712, DateTimeKind.Unspecified).AddTicks(5408), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -126,7 +128,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     TypeOfIncomeCode = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true, comment: "소득종류코드"),
                     UserId = table.Column<string>(type: "char(36)", nullable: false, comment: "사용자 식별자"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 404, DateTimeKind.Unspecified).AddTicks(5528), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 729, DateTimeKind.Unspecified).AddTicks(471), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -138,7 +140,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         column: x => x.AddressId,
                         principalTable: "Address",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Business_User_UserId",
                         column: x => x.UserId,
@@ -159,7 +161,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     MaterialEndYear = table.Column<decimal>(type: "decimal(15,2)", nullable: false, defaultValue: 0m, comment: "기말재료재고액"),
                     BusinessId = table.Column<string>(type: "char(36)", nullable: false, comment: "사업장 식별자"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 409, DateTimeKind.Unspecified).AddTicks(745), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 734, DateTimeKind.Unspecified).AddTicks(1162), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -180,16 +182,16 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                 {
                     Id = table.Column<string>(type: "char(36)", nullable: false, comment: "식별자"),
                     Date = table.Column<DateTime>(type: "date", nullable: false, comment: "일자"),
-                    TransactionTypeId = table.Column<string>(type: "char(36)", nullable: false, comment: "거래구분 (수입, 비용, 고정자산)"),
-                    TransactionDetailsId = table.Column<string>(type: "char(36)", nullable: false, comment: "거래내용"),
+                    TransactionTypeId = table.Column<string>(type: "char(36)", nullable: true, comment: "거래구분 (수입, 비용, 고정자산)"),
+                    TransactionDetailsId = table.Column<string>(type: "char(36)", nullable: true, comment: "거래내용"),
                     TransactionDetailsNote = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, comment: "거래내용 기록"),
-                    AccountId = table.Column<string>(type: "char(36)", nullable: false, comment: "거래처 식별자"),
+                    AccountId = table.Column<string>(type: "char(36)", nullable: true, comment: "거래처 식별자"),
                     AmountId = table.Column<string>(type: "char(36)", nullable: false, comment: "금액 식별자"),
                     RemarkId = table.Column<string>(type: "char(36)", nullable: true, comment: "비고 식별자"),
                     RemarkNote = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true, comment: "비고 기록"),
                     BusinessId = table.Column<string>(type: "char(36)", nullable: false, comment: "사업장 식별자"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 411, DateTimeKind.Unspecified).AddTicks(1373), new TimeSpan(0, 0, 0, 0, 0))),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false, defaultValue: new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 736, DateTimeKind.Unspecified).AddTicks(8742), new TimeSpan(0, 0, 0, 0, 0))),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
                 },
@@ -201,7 +203,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         column: x => x.AccountId,
                         principalTable: "Account",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Transaction_Amount_AmountId",
                         column: x => x.AmountId,
@@ -218,20 +220,17 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         name: "FK_Transaction_GeneralCode_RemarkId",
                         column: x => x.RemarkId,
                         principalTable: "GeneralCode",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Transaction_GeneralCode_TransactionDetailsId",
                         column: x => x.TransactionDetailsId,
                         principalTable: "GeneralCode",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Transaction_GeneralCode_TransactionTypeId",
                         column: x => x.TransactionTypeId,
                         principalTable: "GeneralCode",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

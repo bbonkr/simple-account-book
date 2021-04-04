@@ -10,7 +10,7 @@ using SimpleAccountBook.Data;
 namespace SimpleAccountBook.Data.SqlServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210404093148_Initialization")]
+    [Migration("20210404112510_Initialization")]
     partial class Initialization
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 388, DateTimeKind.Unspecified).AddTicks(9489), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 712, DateTimeKind.Unspecified).AddTicks(5408), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -84,7 +84,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 401, DateTimeKind.Unspecified).AddTicks(9447), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 726, DateTimeKind.Unspecified).AddTicks(4799), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -139,7 +139,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 402, DateTimeKind.Unspecified).AddTicks(8470), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 727, DateTimeKind.Unspecified).AddTicks(2720), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -193,7 +193,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 404, DateTimeKind.Unspecified).AddTicks(5528), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 729, DateTimeKind.Unspecified).AddTicks(471), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -254,7 +254,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 407, DateTimeKind.Unspecified).AddTicks(3014), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 732, DateTimeKind.Unspecified).AddTicks(1744), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -305,7 +305,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 409, DateTimeKind.Unspecified).AddTicks(745), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 734, DateTimeKind.Unspecified).AddTicks(1162), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -361,7 +361,6 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         .HasComment("식별자");
 
                     b.Property<string>("AccountId")
-                        .IsRequired()
                         .HasColumnType("char(36)")
                         .HasComment("거래처 식별자");
 
@@ -378,7 +377,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 411, DateTimeKind.Unspecified).AddTicks(1373), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 736, DateTimeKind.Unspecified).AddTicks(8742), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("date")
@@ -402,7 +401,6 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         .HasComment("비고 기록");
 
                     b.Property<string>("TransactionDetailsId")
-                        .IsRequired()
                         .HasColumnType("char(36)")
                         .HasComment("거래내용");
 
@@ -412,7 +410,6 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         .HasComment("거래내용 기록");
 
                     b.Property<string>("TransactionTypeId")
-                        .IsRequired()
                         .HasColumnType("char(36)")
                         .HasComment("거래구분 (수입, 비용, 고정자산)");
 
@@ -447,7 +444,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetimeoffset")
-                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 9, 31, 48, 414, DateTimeKind.Unspecified).AddTicks(271), new TimeSpan(0, 0, 0, 0, 0)));
+                        .HasDefaultValue(new DateTimeOffset(new DateTime(2021, 4, 4, 11, 25, 9, 739, DateTimeKind.Unspecified).AddTicks(8133), new TimeSpan(0, 0, 0, 0, 0)));
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset");
@@ -464,13 +461,28 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasComment("전자우편주소, 로그인에 사용");
 
+                    b.Property<int>("FailureCount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0)
+                        .HasComment("인증 실패 횟수");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("IsEmailVerified")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsEmailVerified")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasComment("전자우편주소 확인 여부");
+
+                    b.Property<bool>("IsLocked")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasComment("계정 잠금 여부");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -502,7 +514,8 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                 {
                     b.HasOne("SimpleAccountBook.Entities.Address", "Address")
                         .WithOne()
-                        .HasForeignKey("SimpleAccountBook.Entities.Business", "AddressId");
+                        .HasForeignKey("SimpleAccountBook.Entities.Business", "AddressId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SimpleAccountBook.Entities.User", "User")
                         .WithMany("Businesses")
@@ -539,9 +552,7 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
                 {
                     b.HasOne("SimpleAccountBook.Entities.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AccountId");
 
                     b.HasOne("SimpleAccountBook.Entities.Amount", "Amount")
                         .WithOne()
@@ -557,19 +568,18 @@ namespace SimpleAccountBook.Data.SqlServer.Migrations
 
                     b.HasOne("SimpleAccountBook.Entities.GeneralCode", "Remark")
                         .WithMany()
-                        .HasForeignKey("RemarkId");
+                        .HasForeignKey("RemarkId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("SimpleAccountBook.Entities.GeneralCode", "TransactionDetails")
                         .WithMany()
                         .HasForeignKey("TransactionDetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("SimpleAccountBook.Entities.GeneralCode", "TransactionType")
                         .WithMany()
                         .HasForeignKey("TransactionTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Account");
 
