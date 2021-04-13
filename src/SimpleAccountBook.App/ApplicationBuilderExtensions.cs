@@ -14,12 +14,17 @@ namespace SimpleAccountBook.Data
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseDatabaseMigrations(this IApplicationBuilder app, bool seedSampleData = false)
+        public static IApplicationBuilder UseDatabaseMigrations(this IApplicationBuilder app, bool recreateOnStartup = false, bool seedSampleData = false)
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 using (var dbContext = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>().CreateDbContext())
                 {
+                    if (recreateOnStartup)
+                    {
+                        dbContext.Database.EnsureDeleted();
+                    }
+
                     dbContext.Database.Migrate();
 
                     if (seedSampleData)

@@ -41,6 +41,9 @@ namespace SimepleAccountBook.App
                 });
             });
 
+            services.AddDomainServices();
+            services.AddAutoMapper(this.GetType().Assembly);
+
             var defaultApiVersion = new ApiVersion(1, 0);
 
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.Name));
@@ -53,7 +56,7 @@ namespace SimepleAccountBook.App
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDatabaseMigrations(true);
+            app.UseDatabaseMigrations(false, true);
 
             if (env.IsDevelopment())
             {
