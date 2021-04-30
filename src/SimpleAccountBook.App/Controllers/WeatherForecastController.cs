@@ -14,7 +14,7 @@ using kr.bbon.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace SimepleAccountBook.App.Controllers
+namespace SimpleAccountBook.App
 {
     [ApiVersion(DefaultValues.ApiVersion)]
     [ApiController]

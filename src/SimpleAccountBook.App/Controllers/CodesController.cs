@@ -12,7 +12,7 @@ using kr.bbon.AspNetCore;
 using SimepleAccountBook.App.Domains.Codes;
 using System.Net;
 
-namespace SimepleAccountBook.App.Controllers
+namespace SimpleAccountBook.App
 {
     [ApiVersion(DefaultValues.ApiVersion)]
     [ApiController]
