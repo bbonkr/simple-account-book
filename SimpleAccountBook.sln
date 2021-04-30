@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAccountBook.Data.SqlS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAccountBook.App", "src\SimpleAccountBook.App\SimpleAccountBook.App.csproj", "{566CD56F-2CB7-468A-8AE6-7BB3BBD80206}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAccountBook.Domains", "src\SimpleAccountBook.Domains\SimpleAccountBook.Domains.csproj", "{68FFF848-710A-417B-BDBF-0909B578F412}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{566CD56F-2CB7-468A-8AE6-7BB3BBD80206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{566CD56F-2CB7-468A-8AE6-7BB3BBD80206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{566CD56F-2CB7-468A-8AE6-7BB3BBD80206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68FFF848-710A-417B-BDBF-0909B578F412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68FFF848-710A-417B-BDBF-0909B578F412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68FFF848-710A-417B-BDBF-0909B578F412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68FFF848-710A-417B-BDBF-0909B578F412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
