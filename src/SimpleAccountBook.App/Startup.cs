@@ -17,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 
 using SimpleAccountBook.Data;
 
-namespace SimepleAccountBook.App
+namespace SimpleAccountBook.App
 {
     public class Startup
     {
@@ -51,6 +51,9 @@ namespace SimepleAccountBook.App
             services.AddControllers();
 
             services.AddApiVersioningAndSwaggerGen<ConfigureSwaggerOptions>(defaultApiVersion);
+
+            services.AddAutoMapperProfiles();
+            services.AddMediator();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

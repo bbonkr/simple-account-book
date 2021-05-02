@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace SimepleAccountBook.App
+namespace SimpleAccountBook.App
 {
     public class Program
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using kr.bbon.AspNetCore;
 using kr.bbon.AspNetCore.Models;
 
-namespace SimepleAccountBook.App.Domains
+namespace SimpleAccountBook.App.Domains
 {
     public abstract class DomainServiceBase
     {

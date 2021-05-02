@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-using SimepleAccountBook.App.Models;
+using SimpleAccountBook.App.Models;
 
 using kr.bbon.AspNetCore;
 using kr.bbon.AspNetCore.Filters;
@@ -14,7 +14,7 @@ using kr.bbon.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace SimepleAccountBook.App.Controllers
+namespace SimpleAccountBook.App
 {
     [ApiVersion(DefaultValues.ApiVersion)]
     [ApiController]

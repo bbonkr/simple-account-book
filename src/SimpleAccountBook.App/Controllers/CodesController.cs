@@ -9,10 +9,12 @@ using kr.bbon.AspNetCore.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using kr.bbon.AspNetCore;
-using SimepleAccountBook.App.Domains.Codes;
+using SimpleAccountBook.App.Domains.Codes;
 using System.Net;
+using MediatR;
+using SimpleAccountBook.Domains.Codes.Queries;
 
-namespace SimepleAccountBook.App.Controllers
+namespace SimpleAccountBook.App
 {
     [ApiVersion(DefaultValues.ApiVersion)]
     [ApiController]
@@ -21,17 +23,19 @@ namespace SimepleAccountBook.App.Controllers
     [ApiExceptionHandlerFilter]
     public class CodesController : ApiControllerBase
     {
-        public CodesController(CodeDomainService codeDomainService)
+        public CodesController(CodeDomainService codeDomainService, IMediator mediator)
         {
             this.codeDomainService = codeDomainService;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> GetCodes()
+        public async Task<IActionResult> GetCodes([FromQuery] GetCodeQueryFilter filter)
         {
-            var items = await codeDomainService.GetCodesAsync();
+            //var items = await codeDomainService.GetCodesAsync();
+            var items = await mediator.Send(new GetCodesQueryRequestModel(filter));
 
             return StatusCode(HttpStatusCode.OK, items);
         }
@@ -111,5 +115,6 @@ namespace SimepleAccountBook.App.Controllers
         }
 
         private readonly CodeDomainService codeDomainService;
+        private readonly IMediator mediator;
     }
 }
