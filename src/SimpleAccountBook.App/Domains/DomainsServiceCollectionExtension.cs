@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
 
-using SimepleAccountBook.App.Domains.Codes;
+using SimpleAccountBook.App.Domains.Codes;
 
-namespace SimepleAccountBook.App
+namespace SimpleAccountBook.App
 {
     public static class DomainsServiceCollectionExtension
     {

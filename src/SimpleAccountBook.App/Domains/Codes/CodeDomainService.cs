@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 using SimpleAccountBook.Data;
 using SimpleAccountBook.Entities;
 
-namespace SimepleAccountBook.App.Domains.Codes
+namespace SimpleAccountBook.App.Domains.Codes
 {
     public class CodeDomainService : DomainServiceBase
     {

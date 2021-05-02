@@ -1,6 +1,6 @@
 using System;
 
-namespace SimepleAccountBook.App.Models
+namespace SimpleAccountBook.App.Models
 {
     public class WeatherForecast
     {
