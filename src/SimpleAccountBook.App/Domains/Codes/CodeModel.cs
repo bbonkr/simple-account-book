@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimepleAccountBook.App.Domains.Codes
+namespace SimpleAccountBook.App.Domains.Codes
 {
     public class CodeModel
     {
