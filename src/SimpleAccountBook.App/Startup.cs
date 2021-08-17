@@ -50,7 +50,7 @@ namespace SimpleAccountBook.App
 
             services.AddControllers();
 
-            services.AddApiVersioningAndSwaggerGen<ConfigureSwaggerOptions>(defaultApiVersion);
+            services.AddApiVersioningAndSwaggerGen(defaultApiVersion);
 
             services.AddAutoMapperProfiles();
             services.AddMediator();

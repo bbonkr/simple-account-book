@@ -13,6 +13,8 @@ using kr.bbon.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using kr.bbon.Core.Models;
+using kr.bbon.Core;
 
 namespace SimpleAccountBook.App
 {
@@ -51,7 +53,7 @@ namespace SimpleAccountBook.App
             return StatusCode(HttpStatusCode.OK, data);
         }
 
-        [ApiVersion("0.9", Deprecated =true)]
+        [ApiVersion("0.9", Deprecated = true)]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponseModel<IEnumerable<WeatherForecast>>))]
         public IActionResult GetV0_9()
@@ -80,11 +82,13 @@ namespace SimpleAccountBook.App
                 {
                     Code = "Some code",
                     Message = "Some message",
-                    InnerError = new ErrorModel
-                    {
-                        Code = "Some inner code",
-                        Message = "Some inner message",
-                    }
+                    InnerErrors = new List<ErrorModel> {
+                        new ErrorModel
+                        {
+                            Code = "Some inner code",
+                            Message = "Some inner message",
+                        },
+                    },
                 });
         }
     }
