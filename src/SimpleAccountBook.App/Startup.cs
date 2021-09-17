@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using FluentValidation.AspNetCore;
 using kr.bbon.AspNetCore;
 using kr.bbon.AspNetCore.Filters;
 using kr.bbon.AspNetCore.Options;
@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using SimpleAccountBook.Data;
+using SimpleAccountBook.Domains;
 
 namespace SimpleAccountBook.App
 {
@@ -48,12 +49,17 @@ namespace SimpleAccountBook.App
 
             services.Configure<AppOptions>(Configuration.GetSection(AppOptions.Name));
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(config =>
+                {
+                    config.RegisterValidatorsFromAssembly(typeof(DomainsPlaceHolder).Assembly);
+                });
 
             services.AddApiVersioningAndSwaggerGen(defaultApiVersion);
 
             services.AddAutoMapperProfiles();
             services.AddMediator();
+            services.AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

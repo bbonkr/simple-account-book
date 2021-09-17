@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-
+using FluentValidation.AspNetCore;
 using MediatR;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +25,13 @@ namespace SimpleAccountBook.App
         public static IServiceCollection AddMediator(this IServiceCollection services)
         {
             services.AddMediatR(typeof(DomainsPlaceHolder).GetTypeInfo().Assembly);
+
+            return services;
+        }
+
+        public static IServiceCollection AddFluentValidation(this IServiceCollection services)
+        {
+            services.AddScoped<IValidatorInterceptor, FluentValidationInterceptor>();
 
             return services;
         }
