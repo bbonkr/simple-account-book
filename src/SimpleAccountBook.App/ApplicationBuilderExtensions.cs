@@ -18,7 +18,7 @@ namespace SimpleAccountBook.Data
         {
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                using (var dbContext = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>().CreateDbContext())
+                using (var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
                 {
                     if (recreateOnStartup)
                     {

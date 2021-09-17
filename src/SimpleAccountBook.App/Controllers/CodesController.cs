@@ -14,6 +14,12 @@ using System.Net;
 using MediatR;
 using SimpleAccountBook.Domains.Codes.Queries;
 using kr.bbon.Core;
+using Microsoft.AspNetCore.Http;
+using SimpleAccountBook.Domains.Codes.Models;
+using kr.bbon.AspNetCore.Models;
+using kr.bbon.EntityFrameworkCore.Extensions;
+using CodeModel = SimpleAccountBook.Domains.Codes.Models.CodeModel;
+using SimpleAccountBook.App.Models;
 
 namespace SimpleAccountBook.App
 {
@@ -21,7 +27,6 @@ namespace SimpleAccountBook.App
     [ApiController]
     [Area(DefaultValues.AreaName)]
     [Route(DefaultValues.RouteTemplate)]
-    [ApiExceptionHandlerFilter]
     public class CodesController : ApiControllerBase
     {
         public CodesController(CodeDomainService codeDomainService, IMediator mediator)
@@ -31,14 +36,19 @@ namespace SimpleAccountBook.App
         }
 
         [HttpGet]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> GetCodes([FromQuery] GetCodeQueryFilter filter)
+        [Route("test")]
+        public Task Test()
         {
-            //var items = await codeDomainService.GetCodesAsync();
+            // test
+            return Task.CompletedTask;
+        }
+
+        [HttpGet]
+        public async Task<CodesResponseModel> GetCodes([FromQuery] GetCodeQueryFilter filter)
+        {
             var items = await mediator.Send(new GetCodesQueryRequestModel(filter));
 
-            return StatusCode(HttpStatusCode.OK, items);
+            return items;
         }
 
         [HttpGet]

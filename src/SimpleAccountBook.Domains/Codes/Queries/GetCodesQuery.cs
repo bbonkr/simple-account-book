@@ -8,7 +8,7 @@ using SimpleAccountBook.Domains.Codes.Models;
 
 namespace SimpleAccountBook.Domains.Codes.Queries
 {
-    public class GetCodesQueryRequestModel : IRequest<IPagedModel<CodeModel>>
+    public class GetCodesQueryRequestModel : IRequest<CodesResponseModel>
     {
         public GetCodesQueryRequestModel(GetCodeQueryFilter filter)
         {
