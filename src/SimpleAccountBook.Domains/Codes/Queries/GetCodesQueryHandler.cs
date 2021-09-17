@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using AutoMapper;
-
+using kr.bbon.EntityFrameworkCore.Extensions;
 using MediatR;
 
 using Microsoft.EntityFrameworkCore;
@@ -14,15 +14,15 @@ using SimpleAccountBook.Domains.Codes.Models;
 
 namespace SimpleAccountBook.Domains.Codes.Queries
 {
-    public class GetCodesQueryHandler : IRequestHandler<GetCodesQueryRequestModel, IPagedModel<CodeModel>>
+    public class GetCodesQueryHandler : IRequestHandler<GetCodesQueryRequestModel, CodesResponseModel>
     {
-        public GetCodesQueryHandler(IDbContextFactory<ApplicationDbContext> dbContextFactory, IMapper mapper)
+        public GetCodesQueryHandler(ApplicationDbContext dbContext, IMapper mapper)
         {
-            this.dbContext = dbContextFactory.CreateDbContext();
+            this.dbContext = dbContext;
             this.mapper = mapper;
         }
 
-        public async Task<IPagedModel<CodeModel>> Handle(GetCodesQueryRequestModel request, CancellationToken cancellationToken)
+        public async Task<CodesResponseModel> Handle(GetCodesQueryRequestModel request, CancellationToken cancellationToken)
         {
             var query = dbContext.Codes
                 .Include(x => x.SubCodes)
@@ -31,7 +31,7 @@ namespace SimpleAccountBook.Domains.Codes.Queries
 
             if (request.Filter.Id.HasValue)
             {
-                query = query.Where(x => x.Id == request.Filter.Id);
+                query = query.Where(x => x.Id == request.Filter.Id.Value);
             }
 
             if (!string.IsNullOrWhiteSpace(request.Filter.Code))
@@ -45,7 +45,9 @@ namespace SimpleAccountBook.Domains.Codes.Queries
                 .AsNoTracking()
                 .ToPagedModelAsync(request.Filter.Page, request.Filter.Limit, cancellationToken);
 
-            return result;
+            var responseModel = mapper.Map<CodesResponseModel>(result);
+
+            return responseModel;
         }
 
         private readonly ApplicationDbContext dbContext;

@@ -21,11 +21,11 @@ namespace SimpleAccountBook.App.Domains.Codes
     public class CodeDomainService : DomainServiceBase
     {
         public CodeDomainService(
-            IDbContextFactory<ApplicationDbContext> dbContextFactory,
+            ApplicationDbContext dbContext,
             IMapper mapper,
             ILoggerFactory loggerFactory)
         {
-            dbContext = dbContextFactory.CreateDbContext();
+            this.dbContext = dbContext;
             this.mapper = mapper;
             logger = loggerFactory.CreateLogger<CodeDomainService>();
         }
