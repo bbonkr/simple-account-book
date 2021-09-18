@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleAccountBook.Domains.Codes.Validators
 {
-    public class GetCodeQueryFilterValidator : AbstractValidator<GetCodeQueryFilter>
+    public class GetCodeQueryFilterValidator : AbstractValidator<GetCodesQueryFilter>
     {
         public GetCodeQueryFilterValidator()
         {

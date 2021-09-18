@@ -14,7 +14,7 @@ using SimpleAccountBook.Domains.Codes.Models;
 
 namespace SimpleAccountBook.Domains.Codes.Queries
 {
-    public class GetCodesQueryHandler : IRequestHandler<GetCodesQueryRequestModel, CodesResponseModel>
+    public class GetCodesQueryHandler : IRequestHandler<GetCodesQuery, CodesResponseModel>
     {
         public GetCodesQueryHandler(ApplicationDbContext dbContext, IMapper mapper)
         {
@@ -22,10 +22,11 @@ namespace SimpleAccountBook.Domains.Codes.Queries
             this.mapper = mapper;
         }
 
-        public async Task<CodesResponseModel> Handle(GetCodesQueryRequestModel request, CancellationToken cancellationToken)
+        public async Task<CodesResponseModel> Handle(GetCodesQuery request, CancellationToken cancellationToken)
         {
             var query = dbContext.Codes
                 .Include(x => x.SubCodes)
+                .Where(x => !x.IsDeleted)
                 .Where(x => x.ParentId == null)
                 .AsQueryable();
 

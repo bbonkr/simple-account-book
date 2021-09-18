@@ -35,42 +35,39 @@ namespace SimpleAccountBook.App
             this.mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("test")]
-        public Task Test()
-        {
-            // test
-            return Task.CompletedTask;
-        }
+   
 
         [HttpGet]
-        public async Task<CodesResponseModel> GetCodes([FromQuery] GetCodeQueryFilter filter)
+        public async Task<CodesResponseModel> GetCodes([FromQuery] GetCodesQueryFilter filter)
         {
-            var items = await mediator.Send(new GetCodesQueryRequestModel(filter));
+            var items = await mediator.Send(new GetCodesQuery(filter));
 
             return items;
         }
 
         [HttpGet]
         [Route("{id:guid}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> GetSubcodes(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<CodeModel> GetSubcodes(Guid id)
         {
-            var items = await codeDomainService.GetSubcodesAsync(id);
+            var result = await mediator.Send(new GetCodeQuery(new GetCodeQueryFilter
+            {
+                Id = id,
+            }));
 
-            return StatusCode(HttpStatusCode.OK, items);
+            return result;
         }
 
         [HttpGet]
         [Route("{code}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> GetSubcodes(string code)
+        public async Task<CodeModel> GetSubcodes(string code)
         {
-            var items = await codeDomainService.GetSubcodesAsync(code);
+            var result = await mediator.Send(new GetCodeQuery(new GetCodeQueryFilter
+            {
+                Code = code,
+            }));
 
-            return StatusCode(HttpStatusCode.OK, items);
+            return result;
         }
 
 

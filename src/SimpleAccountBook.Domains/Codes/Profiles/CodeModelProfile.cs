@@ -15,7 +15,6 @@ namespace SimpleAccountBook.Domains.Codes.Profiles
         public CodeModelProfile()
         {
             CreateMap<GeneralCode, CodeModel>()
-                //.Include<GeneralCode, CodeModel>()
                 .ForMember(dest => dest.Codes, opt => opt.MapFrom(src => src.SubCodes));
 
             CreateMap<IPagedModel<CodeModel>, CodesResponseModel>()
