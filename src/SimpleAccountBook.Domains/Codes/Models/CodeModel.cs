@@ -1,5 +1,4 @@
-﻿using kr.bbon.EntityFrameworkCore.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace SimpleAccountBook.Domains.Codes.Models
@@ -21,7 +20,4 @@ namespace SimpleAccountBook.Domains.Codes.Models
 
         public IEnumerable<CodeModel> Codes { get; set; }
     }
-
-    public class CodesResponseModel : PagedModel<CodeModel> { }
- 
 }

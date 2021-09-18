@@ -4,22 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using kr.bbon.AspNetCore.Mvc;
-using kr.bbon.AspNetCore.Filters;
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using kr.bbon.AspNetCore;
-using SimpleAccountBook.App.Domains.Codes;
 using System.Net;
 using MediatR;
 using SimpleAccountBook.Domains.Codes.Queries;
-using kr.bbon.Core;
 using Microsoft.AspNetCore.Http;
 using SimpleAccountBook.Domains.Codes.Models;
-using kr.bbon.AspNetCore.Models;
-using kr.bbon.EntityFrameworkCore.Extensions;
-using CodeModel = SimpleAccountBook.Domains.Codes.Models.CodeModel;
-using SimpleAccountBook.App.Models;
+
+using SimpleAccountBook.Domains.Codes.Commands;
+using Microsoft.Extensions.Logging;
 
 namespace SimpleAccountBook.App
 {
@@ -29,103 +24,73 @@ namespace SimpleAccountBook.App
     [Route(DefaultValues.RouteTemplate)]
     public class CodesController : ApiControllerBase
     {
-        public CodesController(CodeDomainService codeDomainService, IMediator mediator)
+        public CodesController(
+            IMediator mediator,
+            ILogger<CodesController> logger)
         {
-            this.codeDomainService = codeDomainService;
             this.mediator = mediator;
+            this.logger = logger;
         }
 
         [HttpGet]
-        [Route("test")]
-        public Task Test()
+        public async Task<CodesResponseModel> GetCodes([FromQuery] GetCodesQueryFilter filter)
         {
-            // test
-            return Task.CompletedTask;
-        }
-
-        [HttpGet]
-        public async Task<CodesResponseModel> GetCodes([FromQuery] GetCodeQueryFilter filter)
-        {
-            var items = await mediator.Send(new GetCodesQueryRequestModel(filter));
+            var items = await mediator.Send(new GetCodesQuery(filter));
 
             return items;
         }
 
         [HttpGet]
         [Route("{id:guid}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> GetSubcodes(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<CodeModel> GetCodeDetails(Guid id)
         {
-            var items = await codeDomainService.GetSubcodesAsync(id);
+            var result = await mediator.Send(new GetCodeQuery(new GetCodeQueryFilter(id)));
 
-            return StatusCode(HttpStatusCode.OK, items);
+            return result;
         }
 
         [HttpGet]
         [Route("{code}")]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> GetSubcodes(string code)
+        public async Task<CodeModel> GetCodeDetails(string code)
         {
-            var items = await codeDomainService.GetSubcodesAsync(code);
+            var result = await mediator.Send(new GetCodeQuery(new GetCodeQueryFilter(code)));
 
-            return StatusCode(HttpStatusCode.OK, items);
+            return result;
         }
 
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> InsertAsync(InsertCodeModel model)
+        public async Task<CodeModel> InsertAsync([FromBody]  CodeInsertRequestModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var item = await codeDomainService.InsertAsync(model);
+            var result = await mediator.Send(new InsertCodeCommand(model));
 
-                return StatusCode(HttpStatusCode.Created, item);
-            }
-            else
-            {
-                return StatusCode(HttpStatusCode.BadRequest, ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
-            }
+            return result;
         }
 
-        [HttpPatch]
-        [Route("{id:guid}")]
+        [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.Accepted)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> UpdateAsync([FromRoute] Guid id, [FromBody] UpdateCodeModel model)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<CodeModel> UpdateAsync([FromBody] CodeUpdateRequestModel model)
         {
-            if (id != model.Id)
-            {
-                return StatusCode(HttpStatusCode.BadRequest, "Invalid request body.");
-            }
+            var result = await mediator.Send(new UpdateCodeCommand(model));
 
-            if (ModelState.IsValid)
-            {
-                var item = await codeDomainService.UpdateAsync(model);
-
-                return StatusCode(HttpStatusCode.Created, item);
-            }
-            else
-            {
-                return StatusCode(HttpStatusCode.BadRequest, ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage);
-            }
+            return result;
         }
 
         [HttpDelete]
         [Route("{id:guid}")]
         [ProducesResponseType((int)HttpStatusCode.Accepted)]
-        [ProducesErrorResponseType(typeof(HttpStatusException))]
-        public async Task<IActionResult> DeleteAsync(Guid id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            var result = await codeDomainService.DeleteAsync(id);
+            var result = await mediator.Send(new DeleteCodeCommand(new CodeDeleteRequestModel { Id = id }));
 
-            return StatusCode(HttpStatusCode.Accepted, result);
+            return result;
         }
 
-        private readonly CodeDomainService codeDomainService;
         private readonly IMediator mediator;
+        private readonly ILogger logger;
     }
 }
