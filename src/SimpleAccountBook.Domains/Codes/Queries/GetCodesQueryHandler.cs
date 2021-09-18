@@ -8,23 +8,25 @@ using kr.bbon.EntityFrameworkCore.Extensions;
 using MediatR;
 
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Logging;
 using SimpleAccountBook.Data;
 using SimpleAccountBook.Domains.Codes.Models;
+using SimpleAccountBook.Domains.Shared;
 
 namespace SimpleAccountBook.Domains.Codes.Queries
 {
-    public class GetCodesQueryHandler : IRequestHandler<GetCodesQuery, CodesResponseModel>
+    public class GetCodesQueryHandler : RequestHandlerWithDatabaseContextBase<GetCodesQuery, CodesResponseModel>
     {
-        public GetCodesQueryHandler(ApplicationDbContext dbContext, IMapper mapper)
-        {
-            this.dbContext = dbContext;
-            this.mapper = mapper;
-        }
+        public GetCodesQueryHandler(
+            ApplicationDbContext dbContext,
+            IMapper mapper,
+            IMediator mediator,
+            ILogger<GetCodeQueryHandler> logger)
+            : base(dbContext, mapper, mediator, logger) { }
 
-        public async Task<CodesResponseModel> Handle(GetCodesQuery request, CancellationToken cancellationToken)
+        public override async Task<CodesResponseModel> Handle(GetCodesQuery request, CancellationToken cancellationToken)
         {
-            var query = dbContext.Codes
+            var query = DbContext.Codes
                 .Include(x => x.SubCodes)
                 .Where(x => !x.IsDeleted)
                 .Where(x => x.ParentId == null)
@@ -42,16 +44,13 @@ namespace SimpleAccountBook.Domains.Codes.Queries
 
             var result = await query
                 .OrderBy(x => x.Ordinal)
-                .Select(x => mapper.Map<CodeModel>(x))
+                .Select(x => Mapper.Map<CodeModel>(x))
                 .AsNoTracking()
                 .ToPagedModelAsync(request.Filter.Page, request.Filter.Limit, cancellationToken);
 
-            var responseModel = mapper.Map<CodesResponseModel>(result);
+            var responseModel = Mapper.Map<CodesResponseModel>(result);
 
             return responseModel;
         }
-
-        private readonly ApplicationDbContext dbContext;
-        private readonly IMapper mapper;
     }
 }

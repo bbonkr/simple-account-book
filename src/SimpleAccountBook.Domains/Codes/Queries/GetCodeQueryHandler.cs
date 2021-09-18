@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SimpleAccountBook.Data;
 using SimpleAccountBook.Domains.Codes.Models;
+using SimpleAccountBook.Domains.Shared;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -13,21 +14,18 @@ using System.Threading.Tasks;
 
 namespace SimpleAccountBook.Domains.Codes.Queries
 {
-    public class GetCodeQueryHandler : IRequestHandler<GetCodeQuery, CodeModel>
+    public class GetCodeQueryHandler : RequestHandlerWithDatabaseContextBase<GetCodeQuery, CodeModel>
     {
         public GetCodeQueryHandler(
             ApplicationDbContext dbContext,
             IMapper mapper,
+            IMediator mediator,
             ILogger<GetCodeQueryHandler> logger)
-        {
-            this.dbContext = dbContext;
-            this.mapper = mapper;
-            this.logger = logger;
-        }
+            : base(dbContext, mapper, mediator, logger) { }
 
-        public async Task<CodeModel> Handle(GetCodeQuery request, CancellationToken cancellationToken)
+        public override async Task<CodeModel> Handle(GetCodeQuery request, CancellationToken cancellationToken)
         {
-            var query = dbContext.Codes.Where(x => !x.IsDeleted);
+            var query = DbContext.Codes.Where(x => !x.IsDeleted);
 
             if(request.Filter.Id.HasValue)
             {
@@ -40,7 +38,7 @@ namespace SimpleAccountBook.Domains.Codes.Queries
             }
 
             var result = await query
-                .Select(x => mapper.Map<CodeModel>(x))
+                .Select(x => Mapper.Map<CodeModel>(x))
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (result == null)
@@ -56,8 +54,5 @@ namespace SimpleAccountBook.Domains.Codes.Queries
             return result;
         }
 
-        private readonly ApplicationDbContext dbContext;
-        private readonly IMapper mapper;
-        private readonly ILogger logger;
     }
 }
