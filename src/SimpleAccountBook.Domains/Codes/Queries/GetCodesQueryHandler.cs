@@ -21,7 +21,7 @@ namespace SimpleAccountBook.Domains.Codes.Queries
             ApplicationDbContext dbContext,
             IMapper mapper,
             IMediator mediator,
-            ILogger<GetCodeQueryHandler> logger)
+            ILogger<GetCodesQueryHandler> logger)
             : base(dbContext, mapper, mediator, logger) { }
 
         public override async Task<CodesResponseModel> Handle(GetCodesQuery request, CancellationToken cancellationToken)

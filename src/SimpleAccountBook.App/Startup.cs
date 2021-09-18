@@ -15,7 +15,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SimpleAccountBook.App.Infrastructure.Errors;
 using SimpleAccountBook.Data;
 using SimpleAccountBook.Domains;
 
@@ -47,7 +46,6 @@ namespace SimpleAccountBook.App
                 .EnableSensitiveDataLogging();
             });
 
-            services.AddDomainServices();
             services.AddAutoMapper(this.GetType().Assembly);
 
             var defaultApiVersion = new ApiVersion(1, 0);
@@ -80,7 +78,6 @@ namespace SimpleAccountBook.App
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddSerilogLogging();
-            //app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseDatabaseMigrations(false, true);
             app.UseCors(builder =>

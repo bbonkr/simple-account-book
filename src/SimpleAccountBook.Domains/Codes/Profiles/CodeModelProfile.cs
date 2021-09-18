@@ -19,6 +19,9 @@ namespace SimpleAccountBook.Domains.Codes.Profiles
 
             CreateMap<IPagedModel<CodeModel>, CodesResponseModel>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items));
+
+            CreateMap<CodeInsertRequestModel, GeneralCode>();
+            CreateMap<CodeUpdateRequestModel, GeneralCode>();
         }
     }
 }

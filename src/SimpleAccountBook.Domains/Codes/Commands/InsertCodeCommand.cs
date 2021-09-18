@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SimpleAccountBook.Domains.Codes.Commands
 {
@@ -17,18 +15,5 @@ namespace SimpleAccountBook.Domains.Codes.Commands
         }
 
         public CodeInsertRequestModel Payload { get; }
-    }
-
-    public class InsertCodeCommand: IRequestHandler<InsertCodeCommand, CodeModel>
-    {
-        public InsertCodeCommand()
-        {
-
-        }
-
-        public async Task<CodeModel> Handle(InsertCodeCommand request, CancellationToken cancellationToken)
-        {
-            
-        }
     }
 }
