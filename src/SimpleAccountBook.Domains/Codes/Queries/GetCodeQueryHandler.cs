@@ -43,12 +43,7 @@ namespace SimpleAccountBook.Domains.Codes.Queries
 
             if (result == null)
             {
-                var error = new ErrorModel
-                {
-                    Code = $"{HttpStatusCode.NotFound}",
-                    Message = "Could not find the data.",
-                };
-                throw new HttpStatusException<ErrorModel>(HttpStatusCode.NotFound, error.Message, error);
+                throw new ApiException(HttpStatusCode.NotFound, "Could not find the data.");
             }
 
             return result;

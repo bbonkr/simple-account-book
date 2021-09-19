@@ -17,23 +17,12 @@ namespace SimpleAccountBook.App
         {
             if (!result.IsValid)
             {
-                var error = new ApiErrorModel
-                {
-                    Instance = actionContext.ActionDescriptor.DisplayName,
-                    Path = actionContext.HttpContext.Request.Path,
-                    Method = actionContext.HttpContext.Request.Method,
-                    Code = $"{HttpStatusCode.BadRequest}",
-                    Message = result.Errors.FirstOrDefault()?.ErrorMessage,
-                    InnerErrors = result.Errors.Select(x => {
-                        return new ErrorModel
-                        {
-                            Code = x.ErrorCode,
-                            Message = x.ErrorMessage,
-                        };
-                    }).ToList(),
-                };
+                var error = new ErrorModel(
+                    result.Errors.FirstOrDefault()?.ErrorMessage, 
+                    Code: $"{HttpStatusCode.BadRequest}", 
+                    InnerErrors: result.Errors.Select(x => new ErrorModel(x.ErrorMessage, Code: x.ErrorCode, Reference: x.PropertyName)).ToList());
 
-                throw new HttpStatusException<ErrorModel>(HttpStatusCode.BadRequest, error.Message, error);
+                throw new ApiException(HttpStatusCode.BadRequest, error.Message, error);
             }
             return result;
         }

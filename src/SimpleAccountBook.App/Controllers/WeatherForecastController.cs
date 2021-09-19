@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using kr.bbon.Core.Models;
 using kr.bbon.Core;
+using Microsoft.AspNetCore.Http;
 
 namespace SimpleAccountBook.App
 {
@@ -76,20 +77,12 @@ namespace SimpleAccountBook.App
         [ProducesErrorResponseType(typeof(ApiResponseModel<ErrorModel>))]
         public IActionResult GetV0_8()
         {
-            throw new SomethingWrongException<ErrorModel>(
+            throw new ApiException(StatusCodes.Status403Forbidden,
                 "Test exception",
-                new ErrorModel
-                {
-                    Code = "Some code",
-                    Message = "Some message",
-                    InnerErrors = new List<ErrorModel> {
-                        new ErrorModel
-                        {
-                            Code = "Some inner code",
-                            Message = "Some inner message",
-                        },
-                    },
-                });
+                new ErrorModel("Some message", Code: "Some code", InnerErrors: new List<ErrorModel> {
+                        new ErrorModel("Some inner message", Code: "Some inner code")
+                    })
+                );
         }
     }
 }

@@ -55,15 +55,10 @@ namespace SimpleAccountBook.Domains.Codes.Queries
             var result = await DbContext.Codes.Where(x => !x.IsDeleted)
                 .Where(x => x.ParentId == request.Filter.ParentId)
                 .AnyAsync(cancellationToken);
-            
-            if(request.Filter.ThrowIfNotExists && !result)
+
+            if (request.Filter.ThrowIfNotExists && !result)
             {
-               var error = new ErrorModel
-                {
-                    Code = $"{HttpStatusCode.BadRequest}",
-                    Message = "Parent code should be exists."
-                };
-                throw new HttpStatusException<ErrorModel>(HttpStatusCode.BadRequest, error.Message, error);
+                throw new ApiException(HttpStatusCode.BadRequest, "Parent code should be exists.");
             }
 
             return result;

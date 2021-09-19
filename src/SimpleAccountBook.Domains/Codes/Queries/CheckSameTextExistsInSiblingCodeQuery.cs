@@ -61,12 +61,7 @@ namespace SimpleAccountBook.Domains.Codes.Queries
 
             if (request.Filter.ThrowIfExists && result)
             {
-                var error = new ErrorModel
-                {
-                    Code = $"{HttpStatusCode.BadRequest}",
-                    Message = "The same text entry exists."
-                };
-                throw new HttpStatusException<ErrorModel>(HttpStatusCode.BadRequest, error.Message, error);
+                throw new ApiException(HttpStatusCode.BadRequest, "The same text entry exists.");
             }
 
             return result;

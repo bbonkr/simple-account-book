@@ -3,7 +3,6 @@ using kr.bbon.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using SimpleAccountBook.App.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,12 +48,11 @@ namespace SimpleAccountBook.App
                     {
                         var firstGenericType = actualReturnType;
 
-                        var apiErrorType = typeof(ApiErrorModel);
                         var errorType = typeof(ErrorModel);
                         var apiReturnType = typeof(ApiResponseModel<>);
 
                         var okReturnType = actualReturnType;
-                        var apiErrorReturnType = apiReturnType.MakeGenericType(apiErrorType);
+                        
                         var errorReturnType = apiReturnType.MakeGenericType(errorType);
 
                         var has200 = false;
@@ -81,7 +79,7 @@ namespace SimpleAccountBook.App
                                     has400 = true;
                                     if (producesResponseTypeAttribute.Type == null)
                                     {
-                                        producesResponseTypeAttribute.Type = apiErrorReturnType;
+                                        producesResponseTypeAttribute.Type = errorReturnType;
                                     }
                                     continue;
                                 }
@@ -104,7 +102,7 @@ namespace SimpleAccountBook.App
                         }
                         if (!has400)
                         {
-                            action.Filters.Add(new ProducesResponseTypeAttribute(apiErrorReturnType, StatusCodes.Status400BadRequest));
+                            action.Filters.Add(new ProducesResponseTypeAttribute(errorReturnType, StatusCodes.Status400BadRequest));
                         }
                         if (!has500)
                         {
